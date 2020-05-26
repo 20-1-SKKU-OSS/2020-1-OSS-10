@@ -28,7 +28,7 @@
 </p>
 <b>Notes:</b>
 <ul>
-<li>Ensure you have a working input sound source.</li>
+<li>Ensure you have a working input sound source.(ex. Mic)</li>
 <li>Run the application on your native terminal (i.e. not iTerm2, etc.)</li>
 <li>On MacOS, you will have to grant Terminal permission to use the input sound source.</li>
 <li>Linux..?
