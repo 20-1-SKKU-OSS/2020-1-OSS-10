@@ -44,10 +44,11 @@ class AudioStream:
         self.audio_plot.setYRange(0.00, 0.25)
         self.audio_plot.setXRange(2000, int(self.RATE / 2))
         self.audio_plot.showGrid(x=True, y=True)
-        self.audio_plot.hideAxis("bottom")
-        self.audio_plot.hideAxis("left")
+        # self.audio_plot.hideAxis("bottom")
+        # self.audio_plot.hideAxis("left")
         # bargraph init
         self.bargraph = None
+        self.testplot = None
 
     @staticmethod
     def set_gradient_brush():
@@ -65,18 +66,37 @@ class AudioStream:
 
         return brush
 
+    # Bar Graph
+    # def set_plotdata(self, name, data_x, data_y):
+    #     """set plot with init and new data -- reference
+    #     self.traces to verify init or recurring data input"""
+    #     if name in self.traces:
+    #         # update bar plot content
+    #         self.bargraph.setOpts(x=data_x, height=data_y, width=350)
+    #     else:
+    #         self.traces.add(name)
+    #         # initial setup of bar plot
+    #         brush = self.set_gradient_brush()
+    #         self.bargraph = pg.BarGraphItem(
+    #             x=data_x, height=data_y, width=50, brush=brush, pen=(0, 0, 0)
+    #         )
+    #     self.audio_plot.addItem(self.bargraph)
+
+    # Custom
     def set_plotdata(self, name, data_x, data_y):
         """set plot with init and new data -- reference
         self.traces to verify init or recurring data input"""
+        data_y = data_y[:64]
         if name in self.traces:
             # update bar plot content
-            self.bargraph.setOpts(x=data_x, height=data_y, width=350)
+            self.bargraph.clear()
+            self.bargraph.setData(data_x, data_y)
         else:
             self.traces.add(name)
             # initial setup of bar plot
-            brush = self.set_gradient_brush()
-            self.bargraph = pg.BarGraphItem(
-                x=data_x, height=data_y, width=350, brush=brush, pen=(0, 0, 0)
+            # brush = self.set_gradient_brush()
+            self.bargraph = pg.ScatterPlotItem(
+                x=data_x, y=data_y, pen=None, symbol='d', size=20, brush=(100, 100, 255, 50)
             )
         self.audio_plot.addItem(self.bargraph)
 
@@ -93,7 +113,7 @@ class AudioStream:
         )  # - 128 :: any int less than 127 will wrap around to 256 down
         # np.abs (below) converts complex num in fft to real magnitude
         sp_data = (
-            np.abs(sp_data[0 : int(self.CHUNK)])  # slice: slice first half of our fft
+            np.abs(sp_data[0:int(self.CHUNK)])  # slice: slice first half of our fft
             * 2
             / (256 * self.CHUNK)
         )  # rescale: mult 2, div amp waveform and no. freq in your spectrum
@@ -112,6 +132,7 @@ class AudioStream:
         timer = QtCore.QTimer()
         timer.timeout.connect(self.update)
         timer.start(20)
+        # self.update()
         self.start()
 
 
