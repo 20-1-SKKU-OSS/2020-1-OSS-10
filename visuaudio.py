@@ -44,8 +44,8 @@ class AudioStream:
         self.audio_plot.setYRange(0.00, 0.25)
         self.audio_plot.setXRange(2000, int(self.RATE / 2))
         self.audio_plot.showGrid(x=True, y=True)
-        # self.audio_plot.hideAxis("bottom")
-        # self.audio_plot.hideAxis("left")
+        self.audio_plot.hideAxis("bottom")
+        self.audio_plot.hideAxis("left")
         # bargraph init
         self.bargraph = None
         self.testplot = None
@@ -137,5 +137,11 @@ class AudioStream:
 
 
 if __name__ == "__main__":
-    AUDIO_APP = AudioStream()
+    print("Choose number and type.")
+    print("-" * 20)
+    print("1: Bar Graph")
+    print("2: Scatter Graph")
+    print("-" * 20)
+    number = int(input("Type:"))
+    AUDIO_APP = AudioStream(number)
     AUDIO_APP.animation()
