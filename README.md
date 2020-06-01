@@ -19,11 +19,21 @@
 2) ```$ pip install -r requirements.txt```<br>
 3) ```$ python visuaudio.py```
 
-<br>
-
-
+### 1. Bar Graph
 <p align="center">
 <img src=https://i.imgur.com/pIpCaUQ.png alt="Audio Spectrum GUI"
+    width=800>
+</p>
+
+### 2. Scatter Graph
+<p align="center">
+<img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/scatter.png?raw=true"
+    width=800>
+</p>
+                                                                                             
+### 3. Curve Graph
+<p align="center">
+<img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/curve.png?raw=true"
     width=800>
 </p>
 <b>Notes:</b>
