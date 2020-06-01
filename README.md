@@ -40,10 +40,12 @@
 <ul>
 <li>Ensure you have a working input sound source.(ex. Mic)</li>
 <li>Run the application on your native terminal (i.e. not iTerm2, etc.)</li>
-<li>On MacOS, you will have to grant Terminal permission to use the input sound source.</li>
 <li>Linux..?
 </ul>
-
+                                                                                           
+<b>MacOS</b>
+1) you will have to grant Terminal permission to use the input sound source.
+                                                            
 <b>Windows</b>
 1) Go link: https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio<br>
 2) You should download <b>'PyAudio-0.2.11-cp{your python version}-cp{your python version}m-win_amd64.whl'</b><br>
