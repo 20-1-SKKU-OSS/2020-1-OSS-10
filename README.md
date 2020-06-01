@@ -19,19 +19,19 @@
 2) ```$ pip install -r requirements.txt```<br>
 3) ```$ python visuaudio.py```
 
-### 1. Bar Graph
+### Bar Graph
 <p align="center">
 <img src=https://i.imgur.com/pIpCaUQ.png alt="Audio Spectrum GUI"
     width=800>
 </p>
 
-### 2. Scatter Graph
+### Scatter Graph
 <p align="center">
 <img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/scatter.png?raw=true"
     width=800>
 </p>
                                                                                              
-### 3. Curve Graph
+### Curve Graph
 <p align="center">
 <img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/curve.png?raw=true"
     width=800>
@@ -44,10 +44,13 @@
 </ul>
                                                                                            
 <b>MacOS</b>
-1) you will have to grant Terminal permission to use the input sound source.
-                                                            
-<b>Windows</b>
-1) Go link: https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio<br>
-2) You should download <b>'PyAudio-0.2.11-cp{your python version}-cp{your python version}m-win_amd64.whl'</b><br>
-3) ```$ pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl``` </li>
+<ul>
+    <li>you will have to grant Terminal permission to use the input sound source.</li>
+</ul>              
 
+<ul>   
+<b>Windows</b>
+    <li>Go link: https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio</li>
+    <li>You should download <b>'PyAudio-0.2.11-cp{your python version}-cp{your python version}m-win_amd64.whl'</b></li>
+    <li>```$ pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl``` </li>
+</ul>
