@@ -13,10 +13,10 @@ class AudioStream:
     """stream audio from input source (mic) and continuously
     plot (bar) based on audio spectrum from waveform data"""
 
-    def __init__(self, num):
+    def __init__(self, num,symbol):
         self.traces = set()
         self.number = num
-
+        self.symbol = symbol
         # pyaudio setup
         self.FORMAT = pyaudio.paInt16  # bytes / sample
         self.CHANNELS = 1  # mono sound
@@ -93,7 +93,7 @@ class AudioStream:
             self.traces.add(name)
             # initial setup of scatter plot
             self.graph = pg.ScatterPlotItem(
-                x=data_x, y=data_y, pen=None, symbol='d', size=30, brush=(100, 100, 255, 100)
+                x=data_x, y=data_y, pen=None, symbol=self.symbol, size=30, brush=(100, 100, 255, 100)
             )
         self.audio_plot.addItem(self.graph)
 
@@ -111,7 +111,22 @@ class AudioStream:
                 x=data_x, y=data_y, pen='w', shadowPen='r',
             )
         self.audio_plot.addItem(self.graph)
-
+    # Line Graph    
+    def set_plotdata_4(self, name, data_x, data_y):
+        data_y = data_y[:64]
+        if name in self.traces:
+            # update curve plot content
+            self.graph.clear()
+            self.graph.setData(data_x, data_y)
+        else:
+            pen1 = pg.mkPen(color=(255, 0, 0), width=15, style=QtCore.Qt.DashLine)
+            self.traces.add(name)
+            # initial setup of curve plot
+            self.graph = pg.PlotCurveItem(
+                x=data_x, y=data_y, pen=pen1, shadowPen='r',
+            )
+        self.audio_plot.addItem(self.graph)
+        
     def update(self):
         """update plot by number which user chose"""
         if self.number == 1:  # Bar Graph
@@ -120,7 +135,9 @@ class AudioStream:
             self.set_plotdata_2(name="spectrum", data_x=self.f, data_y=self.calculate_data())
         elif self.number == 3:  # Curve Graph
             self.set_plotdata_3(name="spectrum", data_x=self.f, data_y=self.calculate_data())
-
+        elif self.number == 4:  # Line Graph
+            self.set_plotdata_4(name="spectrum", data_x=self.f, data_y=self.calculate_data())
+            
     def calculate_data(self):
         """get sound data and manipulate for plotting using fft"""
         # get and unpack waveform data
@@ -155,7 +172,19 @@ class AudioStream:
         timer.start(20)
         # self.update()
         self.start()
-
+        
+def InttoSymbol(symbol):
+    if symbol==1:
+        sym = 'd'
+    elif symbol==2:
+        sym = 'o'
+    elif symbol==3:
+        sym = 'x'
+    elif symbol==4:
+        sym = 't'
+    elif symbol==5:
+        sym = 's'
+    return sym
 
 if __name__ == "__main__":
     print("Choose and type number.")
@@ -163,7 +192,26 @@ if __name__ == "__main__":
     print("1: Bar Graph")
     print("2: Scatter Graph")
     print("3: Curve Graph")
+    print("4: Line Graph")
+    print("5: quit")
     print("-" * 20)
     number = int(input("Graph Type:"))
-    AUDIO_APP = AudioStream(number)
+    while number<1 or number>5:
+        number = int(input("Out of range! try again:"))
+    if number==5:
+        exit()
+    if number==2:
+        print("Choose symbol")
+        print("-" * 20)
+        print("1: Diamond")
+        print("2: Circular")
+        print("3: Cross")
+        print("4: Triangular")
+        print("5: Square")
+        print("-" * 20)
+        symbol = int(input("Symbol:"))
+        while symbol<1 or symbol>5:
+            symbol = int(input("Out of range! try again:"))
+        symbol = InttoSymbol(symbol)
+    AUDIO_APP = AudioStream(number,symbol)
     AUDIO_APP.animation()
