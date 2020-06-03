@@ -111,7 +111,22 @@ class AudioStream:
                 x=data_x, y=data_y, pen='w', shadowPen='r',
             )
         self.audio_plot.addItem(self.graph)
-
+    # Line Graph    
+    def set_plotdata_4(self, name, data_x, data_y):
+        data_y = data_y[:64]
+        if name in self.traces:
+            # update curve plot content
+            self.graph.clear()
+            self.graph.setData(data_x, data_y)
+        else:
+            pen1 = pg.mkPen(color=(255, 0, 0), width=15, style=QtCore.Qt.DashLine)
+            self.traces.add(name)
+            # initial setup of curve plot
+            self.graph = pg.PlotCurveItem(
+                x=data_x, y=data_y, pen=pen1, shadowPen='r',
+            )
+        self.audio_plot.addItem(self.graph)
+        
     def update(self):
         """update plot by number which user chose"""
         if self.number == 1:  # Bar Graph
@@ -120,7 +135,9 @@ class AudioStream:
             self.set_plotdata_2(name="spectrum", data_x=self.f, data_y=self.calculate_data())
         elif self.number == 3:  # Curve Graph
             self.set_plotdata_3(name="spectrum", data_x=self.f, data_y=self.calculate_data())
-
+        elif self.number == 4:  # Line Graph
+            self.set_plotdata_4(name="spectrum", data_x=self.f, data_y=self.calculate_data())
+            
     def calculate_data(self):
         """get sound data and manipulate for plotting using fft"""
         # get and unpack waveform data
@@ -163,7 +180,13 @@ if __name__ == "__main__":
     print("1: Bar Graph")
     print("2: Scatter Graph")
     print("3: Curve Graph")
+    print("4: Line Graph")
+    print("5: quit")
     print("-" * 20)
     number = int(input("Graph Type:"))
+    while number<1 | number>5:
+        number = int(input("Out of range! try again:"))
+    if number==5:
+        exit()
     AUDIO_APP = AudioStream(number)
     AUDIO_APP.animation()
