@@ -118,7 +118,7 @@ class AudioStream:
             self.set_plotdata_1(name="spectrum", data_x=self.f, data_y=self.calculate_data())
         elif self.number == 2:  # Scatter Graph
             self.set_plotdata_2(name="spectrum", data_x=self.f, data_y=self.calculate_data())
-        elif self.number == 3:  # Scatter Graph
+        elif self.number == 3:  # Curve Graph
             self.set_plotdata_3(name="spectrum", data_x=self.f, data_y=self.calculate_data())
 
     def calculate_data(self):
