@@ -40,7 +40,6 @@
 <ul>
 <li>Ensure you have a working input sound source.(ex. Mic)</li>
 <li>Run the application on your native terminal (i.e. not iTerm2, etc.)</li>
-<li>Linux..?
 </ul>                                                                                           
 <b>MacOS</b>
 <ul>
@@ -52,3 +51,5 @@
     <li>You should download <b>'PyAudio-0.2.11-cp{your python version}-cp{your python version}m-win_amd64.whl'</b></li>
     <li> > $ pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl</li>
 </ul>
+<b>Ubuntu Linux</b>
+                                                                                           
