@@ -51,10 +51,10 @@ class AudioStream:
         self.audio_plot.hideAxis("left")
 
         self.a = {
-            'color': 'w',
-            'color_x':100,
-            'color_y':100,
-            'color_z':250,
+            'color': 'r',
+            'colorIndex_x':100,
+            'colorIndex_y':100,
+            'colorIndex_z':255,
         }
 
         # graph init
@@ -95,12 +95,11 @@ class AudioStream:
     # Scatter Plot Graph
     def set_plotdata_2(self, name, data_x, data_y):
         data_y = data_y[:64]
+        brush_default=pg.mkBrush(self.a['colorIndex_x'], self.a['colorIndex_y'], self.a['colorIndex_z'], 100)
         if name in self.traces:
             # update scatter plot content
             self.graph.clear()
-            self.graph = pg.ScatterPlotItem(
-                x=data_x, y=data_y, pen=None, symbol=self.symbol, size=30, brush=(self.a.color_x, self.color_y, self.color_z, 100),
-            )
+            self.graph.setData(data_x,data_y,brush=brush_default)
         else:
             self.traces.add(name)
             # initial setup of scatter plot
@@ -115,7 +114,7 @@ class AudioStream:
         if name in self.traces:
             # update curve plot content
             self.graph.clear()
-            pen1 = pg.mkPen(color=self.a['color'], width=0)
+            pen1 = pg.mkPen(self.a['colorIndex_x'], self.a['colorIndex_y'], self.a['colorIndex_z'],bright=100)
             self.graph = pg.PlotCurveItem(
                 x=data_x, y=data_y, pen=pen1,
             )
@@ -132,7 +131,7 @@ class AudioStream:
         if name in self.traces:
             # update curve plot content
             self.graph.clear()
-            pen1=pg.mkPen(color=self.a['color'], width=15, style=QtCore.Qt.DashLine)
+            pen1=pg.mkPen(self.a['colorIndex_x'], self.a['colorIndex_y'], self.a['colorIndex_z'], bright=100, width=15, style=QtCore.Qt.DashLine)
             self.graph.setData(data_x, data_y,pen=pen1,shadowPen='#19070B')
             """self.graph = pg.PlotCurveItem(
                 x=data_x, y=data_y, pen=self.a['pen'], shadowPen=self.a['shadowPen'],
@@ -183,26 +182,71 @@ class AudioStream:
         if (sys.flags.interactive != 1) or not hasattr(QtCore, "PYQT_VERSION"):
             QtGui.QApplication.instance().exec_()
 
-    @staticmethod
-    def changeColor(key):
+    def changeColor(self,key):
         """change color in curve graph after start"""
         """
-            black : #19070B     red : #FF0000       orange : #FF8000
-            yellow : #FFFF00    green : #40FF00     skyblue : #00FFFF
-            blue : #0040FF      purple: #BF00FF     white : #FFFFFF
+            white : 255,255,255     red : 255, 0, 0       orange : 255, 106, 0
+            yellow : 255, 255, 0   green : 0, 255, 0    skyblue : 0, 255, 255
+            blue : 0, 0, 255      purple: 166, 0, 255   pink : 255, 0, 255
         """
-        global colorIndex
-        colorList = ['#19070B', '#FF0000', '#FF8000', '#FFFF00', '#40FF00', '#00FFFF', '#0040FF', '#BF00FF', ' #FFFFFF']
-        if(colorIndex==8):
-            colorIndex=0
+        self.colorIndexControl()
         try:
-            if (key == Key.enter):
-                AUDIO_APP.a['color'] = colorList[colorIndex]
-                colorIndex+=1
-            elif(key==Key.enter):
-                sys.exit(1)
+            if (key == Key.up):                             #red higher
+                AUDIO_APP.a['color_x']=self.a['colorIndex_x']
+                self.a['colorIndex_x']+=10
+            elif (key == Key.right):                        #green higher
+                AUDIO_APP.a['color_y'] =self.a['colorIndex_y']
+                self.a['colorIndex_y']+=10
+            elif (key == Key.left):                         #blue higher
+                AUDIO_APP.a['color_z'] =self.a['colorIndex_z']
+                self.a['colorIndex_z']+=10
+            elif(key==Key.f1):                              #white
+                self.a['colorIndex_x']= 255
+                self.a['colorIndex_y'] =255
+                self.a['colorIndex_z'] =255
+            elif (key == Key.f2):                           #red
+                self.a['colorIndex_x'] = 255
+                self.a['colorIndex_y'] =0
+                self.a['colorIndex_z'] = 0
+            elif (key == Key.f3):                           #orange
+                self.a['colorIndex_x'] = 255
+                self.a['colorIndex_y'] = 106
+                self.a['colorIndex_z'] = 0
+            elif (key == Key.f4):                           #yellow
+                self.a['colorIndex_x'] = 255
+                self.a['colorIndex_y'] = 255
+                self.a['colorIndex_z'] = 0
+            elif (key == Key.f5):                           #green
+                self.a['colorIndex_x'] = 0
+                self.a['colorIndex_y'] = 255
+                self.a['colorIndex_z'] = 0
+            elif (key == Key.f6):                           #skyblue
+                self.a['colorIndex_x'] = 0
+                self.a['colorIndex_y'] = 255
+                self.a['colorIndex_z'] = 255
+            elif (key == Key.f7):                           #blue
+                self.a['colorIndex_x'] = 0
+                self.a['colorIndex_y'] = 0
+                self.a['colorIndex_z'] = 255
+            elif (key == Key.f8):                           #purple
+                self.a['colorIndex_x'] = 166
+                self.a['colorIndex_y'] = 0
+                self.a['colorIndex_z'] = 255
+            elif (key == Key.f9):                           #pink
+                self.a['colorIndex_x'] = 255
+                self.a['colorIndex_y'] = 0
+                self.a['colorIndex_z'] = 255
+
         except:
             pass
+
+    def colorIndexControl(self):
+        if(self.a['colorIndex_x']>=255):
+            self.a['colorIndex_x']=0
+        if(self.a['colorIndex_y']>=255):
+            self.a['colorIndex_y']=0
+        if(self.a['colorIndex_z']>=255):
+            self.a['colorIndex_z']=0
 
     def animation(self):
         """call self.start and self.update for continuous
@@ -225,8 +269,6 @@ def InttoSymbol(symbol):
     elif symbol==5:
         sym = 's'
     return sym
-global colorIndex
-colorIndex=0
 
 if __name__ == "__main__":
     print("Choose and type number.")
