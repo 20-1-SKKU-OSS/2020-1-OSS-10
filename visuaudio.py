@@ -200,6 +200,7 @@ if __name__ == "__main__":
         number = int(input("Out of range! try again:"))
     if number==5:
         exit()
+    symbol ='o'
     if number==2:
         print("Choose symbol")
         print("-" * 20)
