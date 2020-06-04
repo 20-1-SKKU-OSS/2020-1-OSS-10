@@ -7,6 +7,8 @@ from pyqtgraph.Qt import QtGui, QtCore
 import pyqtgraph as pg
 import pyaudio
 from scipy.fftpack import fft
+from pynput.keyboard import Listener, Key
+
 
 
 class AudioStream:
@@ -47,6 +49,14 @@ class AudioStream:
         self.audio_plot.showGrid(x=True, y=True)
         self.audio_plot.hideAxis("bottom")
         self.audio_plot.hideAxis("left")
+
+        self.a = {
+            'color': 'w',
+            'color_x':100,
+            'color_y':100,
+            'color_z':250,
+        }
+
         # graph init
         self.graph = None
 
@@ -88,12 +98,14 @@ class AudioStream:
         if name in self.traces:
             # update scatter plot content
             self.graph.clear()
-            self.graph.setData(data_x, data_y)
+            self.graph = pg.ScatterPlotItem(
+                x=data_x, y=data_y, pen=None, symbol=self.symbol, size=30, brush=(self.a.color_x, self.color_y, self.color_z, 100),
+            )
         else:
             self.traces.add(name)
             # initial setup of scatter plot
             self.graph = pg.ScatterPlotItem(
-                x=data_x, y=data_y, pen=None, symbol=self.symbol, size=30, brush=(100, 100, 255, 100)
+                x=data_x, y=data_y, pen=None, symbol=self.symbol, size=30, brush=(100, 100, 255, 100),
             )
         self.audio_plot.addItem(self.graph)
 
@@ -103,12 +115,15 @@ class AudioStream:
         if name in self.traces:
             # update curve plot content
             self.graph.clear()
-            self.graph.setData(data_x, data_y)
+            pen1 = pg.mkPen(color=self.a['color'], width=0)
+            self.graph = pg.PlotCurveItem(
+                x=data_x, y=data_y, pen=pen1,
+            )
         else:
             self.traces.add(name)
             # initial setup of curve plot
             self.graph = pg.PlotCurveItem(
-                x=data_x, y=data_y, pen='w', shadowPen='r',
+                x=data_x, y=data_y, pen='r',
             )
         self.audio_plot.addItem(self.graph)
     # Line Graph    
@@ -117,9 +132,13 @@ class AudioStream:
         if name in self.traces:
             # update curve plot content
             self.graph.clear()
-            self.graph.setData(data_x, data_y)
+            pen1=pg.mkPen(color=self.a['color'], width=15, style=QtCore.Qt.DashLine)
+            self.graph.setData(data_x, data_y,pen=pen1,shadowPen='#19070B')
+            """self.graph = pg.PlotCurveItem(
+                x=data_x, y=data_y, pen=self.a['pen'], shadowPen=self.a['shadowPen'],
+            )"""
         else:
-            pen1 = pg.mkPen(color=(255, 0, 0), width=15, style=QtCore.Qt.DashLine)
+            pen1 = pg.mkPen(color=(250, 0, 0), width=15, style=QtCore.Qt.DashLine)
             self.traces.add(name)
             # initial setup of curve plot
             self.graph = pg.PlotCurveItem(
@@ -164,6 +183,27 @@ class AudioStream:
         if (sys.flags.interactive != 1) or not hasattr(QtCore, "PYQT_VERSION"):
             QtGui.QApplication.instance().exec_()
 
+    @staticmethod
+    def changeColor(key):
+        """change color in curve graph after start"""
+        """
+            black : #19070B     red : #FF0000       orange : #FF8000
+            yellow : #FFFF00    green : #40FF00     skyblue : #00FFFF
+            blue : #0040FF      purple: #BF00FF     white : #FFFFFF
+        """
+        global colorIndex
+        colorList = ['#19070B', '#FF0000', '#FF8000', '#FFFF00', '#40FF00', '#00FFFF', '#0040FF', '#BF00FF', ' #FFFFFF']
+        if(colorIndex==8):
+            colorIndex=0
+        try:
+            if (key == Key.enter):
+                AUDIO_APP.a['color'] = colorList[colorIndex]
+                colorIndex+=1
+            elif(key==Key.enter):
+                sys.exit(1)
+        except:
+            pass
+
     def animation(self):
         """call self.start and self.update for continuous
         output application"""
@@ -185,6 +225,8 @@ def InttoSymbol(symbol):
     elif symbol==5:
         sym = 's'
     return sym
+global colorIndex
+colorIndex=0
 
 if __name__ == "__main__":
     print("Choose and type number.")
@@ -215,4 +257,6 @@ if __name__ == "__main__":
             symbol = int(input("Out of range! try again:"))
         symbol = InttoSymbol(symbol)
     AUDIO_APP = AudioStream(number,symbol)
-    AUDIO_APP.animation()
+    with Listener(on_press=AUDIO_APP.changeColor) as listener:
+        AUDIO_APP.animation()
+    listener.join()
