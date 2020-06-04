@@ -35,7 +35,16 @@
 <p align="center">
 <img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/curve.png?raw=true"
     width=800>
+</p>                                                                                           
+                                                                                           
+### Line Graph
+<p align="center">
+<img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/LineGraph.PNG?raw=true"
+    width=800>
 </p>
+<b>       
+                                                                                               
+                                                                                               
 <b>Notes:</b>
 <ul>
 <li>Ensure you have a working input sound source.(ex. Mic)</li>
