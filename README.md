@@ -19,6 +19,8 @@
 2) ```$ pip install -r requirements.txt```<br>
 3) ```$ python visuaudio.py```
 
+## Type of Graph
+
 ### Bar Graph
 <p align="center">
 <img src=https://i.imgur.com/pIpCaUQ.png alt="Audio Spectrum GUI"
@@ -43,7 +45,13 @@
     width=800>
 </p>
 <b>       
+<br>
                                                                                                
+## Color Change
+
+#### You can change color of graph in running.
+- ↑,→,←: R,G,B += 10
+- F1 ~ F9: White ~ Pink
                                                                                                
 <b>Notes:</b>
 <ul>
