@@ -18,6 +18,7 @@
 1) Clone repository
 2) ```$ pip install -r requirements.txt```<br>
 3) ```$ python visuaudio.py```
+<br>
 
 ## Type of Graph
 
