@@ -1,8 +1,8 @@
 ---
 layout: post
 title: visuaudio 시각화 제안
-feature-img: "assets/img/pexels/desk-messy.jpeg"
-thumbnail: "assets/img/thumbnails/desk-messy.jpeg"
+feature-img: "assets/img/pexels/search-map.jpeg"
+thumbnail: "assets/img/thumbnails/search-map.jpeg"
 image: "assets/img/thumbnails/desk-messy.jpg" #seo tag
 tags: [OSS]
 excerpt_separator: <!--more-->
