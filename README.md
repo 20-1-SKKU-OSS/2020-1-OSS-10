@@ -49,6 +49,7 @@
 <ul>
 <li>Ensure you have a working input sound source.(ex. Mic)</li>
 <li>Run the application on your native terminal (i.e. not iTerm2, etc.)</li>
+<li>You should run on Python version > 3 </li>
 </ul>                                                                                           
 <b>MacOS</b>
 <ul>
