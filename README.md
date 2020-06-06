@@ -1,13 +1,39 @@
 # 2020-1-OSS Team 10
-### **Team**
-팀장: 서주원<br>
-팀원: 주원규, 장병우, 이지영, 김광원
+- [Static Page](#static_page)
+- [Team](#about_team)
+- [Our Project](#about_project) 
+  - [Type of Graph](#graph)
+  - [Color Change](#color_change)
+  - [Notes:](#notes)
+- [Team Progress](#progress)
+
+## <div id="static_page">Static Page</div>
+https://20-1-skku-oss.github.io/2020-1-OSS-10/
+
+## <div id="about_team">Team</div>
+### Team leader
+- 서주원<br>
+>Github : [BreadHunter49](https://github.com/BreadHunter49) <br><br>
+
+### Team members
+- 주원규 <br>
+>Github : [jwk6553](https://github.com/jwk6553) <br><br>
+
+- 장병우<br>
+>Github : [onion-Ring](https://github.com/onion-Ring) <br><br>
+
+- 이지영<br>
+>Github : [ljy719](https://github.com/ljy719) <br><br>
+
+- 김광원<br>
+>Github : [one0955](https://github.com/one0955)
+
 
 <br>
 <br>
 <br>
 
-# visuaudio
+## <div id="about_project">Visuaudio</div>
 ### A fun GUI application to visualize audio spectrum
 <b>https://github.com/irahorecka/visuaudio</b>
 
@@ -20,7 +46,7 @@
 3) ```$ python visuaudio.py```
 <br>
 
-## Type of Graph
+## <div id="graph">Type of Graph</div>
 
 ### Bar Graph
 <p align="center">
@@ -48,14 +74,14 @@
 <b>       
 <br>
                                                                                                
-## Color Change
+## <div id="color_change">Color Change</div>
 
 #### You can change color of graph in running.
 - ↑,→,←: R,G,B += 10
 - F1 ~ F9: White ~ Pink
 <br>
 
-## Notes:
+## <div id="notes">Notes:</div>
 <ul>
 <li>Ensure you have a working input sound source.(ex. Mic)</li>
 <li>Run the application on your native terminal (i.e. not iTerm2, etc.)</li>
@@ -72,4 +98,14 @@
     <li> > $ pip install PyAudio-0.2.11-cp37-cp37m-win_amd64.whl</li>
 </ul>
 <b>Ubuntu Linux</b>
+
+<br><br>
                                                                                            
+## <div id="progress">Team Progress</div>
+- Added 3 more types of visualization
+  - Scatter
+  - Curve
+  - Line
+- Added color selection
+- Added symbol selection
+- Added exit function
