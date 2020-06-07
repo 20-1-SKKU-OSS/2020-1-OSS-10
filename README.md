@@ -13,7 +13,7 @@ https://20-1-skku-oss.github.io/2020-1-OSS-10/
 ## <div id="about_team">Team</div>
 ### Team leader
 - 서주원<br>
->Github : [BreadHunter49](https://github.com/BreadHunter49) <br><br>
+>Github : [Bearhunter49](https://github.com/BreadHunter49) <br><br>
 
 ### Team members
 - 주원규 <br>
