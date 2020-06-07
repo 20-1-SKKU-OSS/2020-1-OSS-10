@@ -54,19 +54,19 @@ https://20-1-skku-oss.github.io/2020-1-OSS-10/
     width=800>
 </p>
 
-### Scatter Graph
+### Scatter Graph(added)
 <p align="center">
 <img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/scatter.png?raw=true"
     width=800>
 </p>
                                                                                              
-### Curve Graph
+### Curve Graph(added)
 <p align="center">
 <img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/curve.png?raw=true"
     width=800>
 </p>                                                                                           
                                                                                            
-### Line Graph
+### Line Graph(added)
 <p align="center">
 <img src=https://github.com/20-1-SKKU-OSS/2020-1-OSS-10/blob/master/img/LineGraph.PNG?raw=true"
     width=800>
